@@ -14,18 +14,20 @@
         <h2>K-9</h2>
     </div>
 
-    <a href="/dashboard" class="active">📊 Dashboard</a>
-    <a href="/visitantes">🛂 Registrar Visitantes</a>
-    <a href="/reporte">📑 Reportes</a>
-    <a href="/usuarios">👤 Usuarios</a>
-    <a href="/logout" class="logout">🚪 Salir</a>
+    <a href="{{ url_for('dashboard') }}" class="active">📊 Dashboard</a>
+    <a href="{{ url_for('visitantes') }}">🛂 Registrar Visitantes</a>
+    <a href="{{ url_for('reporte') }}">📑 Reportes</a>
+    <a href="{{ url_for('usuarios') }}">👤 Usuarios</a>
+    <a href="{{ url_for('logout') }}" class="logout">🚪 Salir</a>
 </div>
 
 <!-- CONTENIDO -->
 <div class="content">
 
     <h1 class="page-title">Dashboard Corporativo</h1>
-<a href="/registrar" class="btn-premium">📝 Registrar Visitante</a>
+
+    <!-- Botón Registrar Visitante -->
+    <a href="{{ url_for('visitantes') }}" class="btn-premium">📝 Registrar Visitante</a>
 
     <!-- CARDS -->
     <div class="cards-container">
