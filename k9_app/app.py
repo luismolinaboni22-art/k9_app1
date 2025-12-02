@@ -73,7 +73,8 @@ def visitantes():
             return redirect(url_for("visitantes"))
 
     visitantes_lista = Visitante.query.order_by(Visitante.hora_ingreso.desc()).all()
-    return render_template("visitantes.html", visitantes=visitantes_lista)
+    now = datetime.now()  # <-- Agregado aquí para mostrar hora actual en el formulario
+    return render_template("visitantes.html", visitantes=visitantes_lista, now=now)
 
 # ---------- REGISTRAR SALIDA ----------
 @app.route("/salida/<int:id>")
@@ -105,3 +106,4 @@ def logout():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
