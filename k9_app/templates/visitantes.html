@@ -99,7 +99,7 @@ function filterTable() {
     for (let i = 1; i < trs.length; i++) {
         let tds = trs[i].getElementsByTagName("td");
         let match = false;
-        for (let j = 1; j <= 4; j++) { // Busca en columnas de Nombre, Cédula, Empresa, Persona Visita
+        for (let j = 1; j <= 4; j++) {
             if (tds[j] && tds[j].textContent.toLowerCase().includes(input)) {
                 match = true;
                 break;
