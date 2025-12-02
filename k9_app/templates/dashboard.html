@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard – Sistema K9</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-bg">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <img src="{{ url_for('static', filename='logo_k9.png') }}" alt="K9 Logo">
+        <h2>K-9</h2>
+    </div>
+
+    <a href="/dashboard" class="active">📊 Dashboard</a>
+    <a href="/visitantes">🛂 Registrar Visitantes</a>
+    <a href="/reporte">📑 Reportes</a>
+    <a href="/usuarios">👤 Usuarios</a>
+    <a href="/logout" class="logout">🚪 Salir</a>
+</div>
+
+<!-- CONTENIDO -->
+<div class="content">
+
+    <h1 class="page-title">Dashboard Corporativo</h1>
+<a href="/registrar" class="btn-premium">📝 Registrar Visitante</a>
+
+    <!-- CARDS -->
+    <div class="cards-container">
+
+        <div class="card">
+            <h3>Visitantes Hoy</h3>
+            <p class="card-number">34</p>
+        </div>
+
+        <div class="card">
+            <h3>Visitantes en Sitio</h3>
+            <p class="card-number">12</p>
+        </div>
+
+        <div class="card">
+            <h3>Usuarios Activos</h3>
+            <p class="card-number">5</p>
+        </div>
+
+        <div class="card">
+            <h3>Alertas</h3>
+            <p class="card-number">0</p>
+        </div>
+
+    </div>
+
+    <!-- TABLA -->
+    <h2 class="table-title">Últimos visitantes</h2>
+
+    <table class="table-premium">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cédula</th>
+                <th>Empresa</th>
+                <th>Motivo</th>
+                <th>Entrada</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Juan Pérez</td>
+                <td>1-234-567</td>
+                <td>Logística Vargas</td>
+                <td>Reunión</td>
+                <td>8:15 AM</td>
+            </tr>
+
+            <tr>
+                <td>María López</td>
+                <td>8-987-654</td>
+                <td>ServiTech</td>
+                <td>Entrega</td>
+                <td>9:05 AM</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
+
