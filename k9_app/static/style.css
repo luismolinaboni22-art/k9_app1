@@ -381,7 +381,83 @@
     width: 50%;
     border-radius: 3px;
     border: 1px solid #ccc;
+}/* Diferenciación de filas */
+.en-sitio {
+    background-color: #e6ffe6; /* Verde claro para visitantes activos */
 }
+.salido {
+    background-color: #f2f2f2; /* Gris claro para visitantes que salieron */
+}
+
+/* Filtro de búsqueda */
+#searchInput {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 50%;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+/* Formulario visitante */
+.form-visitante {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.form-visitante label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-visitante input {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+.form-visitante button {
+    grid-column: 1 / -1;
+    padding: 8px 12px;
+    border-radius: 3px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+.form-visitante button:hover {
+    background-color: #0056b3;
+}
+
+/* Tabla con scroll */
+.tabla-visitantes {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+.tabla-visitantes table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.tabla-visitantes th, .tabla-visitantes td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+.tabla-visitantes tr:hover {
+    background-color: #f1f1f1;
+}
+.tabla-visitantes button {
+    padding: 4px 8px;
+    border-radius: 3px;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+}
+.tabla-visitantes button:hover {
+    background-color: #c9302c;
+}
+
 
 
 
