@@ -1,0 +1,113 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<h2>Registro de Visitantes</h2>
+
+<!-- Mensajes flash -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<!-- Formulario de registro -->
+<form method="POST" class="form-visitante">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" required>
+
+    <label>Cédula:</label>
+    <input type="text" name="cedula" required>
+
+    <label>Empresa:</label>
+    <input type="text" name="empresa">
+
+    <label>Persona a quien visita:</label>
+    <input type="text" name="persona_visita" required>
+
+    <label>Motivo:</label>
+    <input type="text" name="motivo">
+
+    <label>Placa:</label>
+    <input type="text" name="placa">
+
+    <label>Hora de ingreso:</label>
+    <input type="text" name="hora_ingreso" value="{{ now.strftime('%H:%M') }}" readonly>
+
+    <button type="submit">Registrar Ingreso</button>
+</form>
+
+<!-- Filtro de búsqueda -->
+<label for="searchInput">Buscar visitantes:</label>
+<input type="text" id="searchInput" placeholder="Nombre, cédula o persona" onkeyup="filterTable()">
+
+<!-- Tabla de visitantes -->
+<div class="tabla-visitantes">
+    <table id="visitantesTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Cédula</th>
+                <th>Empresa</th>
+                <th>Persona Visita</th>
+                <th>Motivo</th>
+                <th>Placa</th>
+                <th>Ingreso</th>
+                <th>Salida</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for visitante in visitantes %}
+            <tr class="{% if visitante.hora_salida %}salido{% else %}en-sitio{% endif %}">
+                <td>{{ visitante.id }}</td>
+                <td>{{ visitante.nombre }}</td>
+                <td>{{ visitante.cedula }}</td>
+                <td>{{ visitante.empresa or '-' }}</td>
+                <td>{{ visitante.persona_visita }}</td>
+                <td>{{ visitante.motivo or '-' }}</td>
+                <td>{{ visitante.placa or '-' }}</td>
+                <td>{{ visitante.hora_ingreso.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+                <td>
+                    {% if visitante.hora_salida %}
+                        {{ visitante.hora_salida.strftime('%d/%m/%Y %H:%M:%S') }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not visitante.hora_salida %}
+                    <form method="GET" action="{{ url_for('salida', id=visitante.id) }}" style="display:inline;">
+                        <button type="submit">Registrar Salida</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+function filterTable() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let table = document.getElementById("visitantesTable");
+    let trs = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < trs.length; i++) {
+        let tds = trs[i].getElementsByTagName("td");
+        let match = false;
+        for (let j = 1; j <= 4; j++) { // Busca en columnas de Nombre, Cédula, Empresa, Persona Visita
+            if (tds[j] && tds[j].textContent.toLowerCase().includes(input)) {
+                match = true;
+                break;
+            }
+        }
+        trs[i].style.display = match ? "" : "none";
+    }
+}
+</script>
+
+{% endblock %}
