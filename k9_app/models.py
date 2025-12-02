@@ -14,5 +14,3 @@ class Visitante(db.Model):
     hora_ingreso = db.Column(db.DateTime, default=datetime.utcnow)
     hora_salida = db.Column(db.DateTime, nullable=True)
 
-    def __repr__(self):
-        return f"<Visitante {self.nombre}>"
