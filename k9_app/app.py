@@ -1,17 +1,16 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from datetime import datetime
 import os
-from models import db, Visitante  # Importa el modelo
+from models import db, Visitante  # Modelo de visitantes
 
 app = Flask(__name__)
 app.secret_key = "clave_super_secreta_para_sessions"
 
 # ---------- CONFIGURACIÓN DE BASE DE DATOS ----------
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///visitantes.db'  # Cambiar a PostgreSQL si se desea
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///visitantes.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
-# Crear tablas al iniciar la app
 with app.app_context():
     db.create_all()
 
@@ -25,13 +24,11 @@ def login():
     if request.method == "POST":
         user = request.form.get("email")
         password = request.form.get("password")
-
         if user == ADMIN_USER and password == ADMIN_PASSWORD:
             session["user"] = user
             return redirect("/dashboard")
         else:
             return render_template("login.html", error="Usuario o contraseña incorrectos")
-
     return render_template("login.html")
 
 # ---------- DASHBOARD ----------
@@ -48,7 +45,6 @@ def visitantes():
         return redirect("/login")
 
     if request.method == "POST":
-        # Registro de ingreso
         nombre = request.form.get("nombre")
         cedula = request.form.get("cedula")
         empresa = request.form.get("empresa")
@@ -73,7 +69,7 @@ def visitantes():
             return redirect(url_for("visitantes"))
 
     visitantes_lista = Visitante.query.order_by(Visitante.hora_ingreso.desc()).all()
-    now = datetime.now()  # <-- Agregado aquí para mostrar hora actual en el formulario
+    now = datetime.now()  # <--- Hora actual para formulario
     return render_template("visitantes.html", visitantes=visitantes_lista, now=now)
 
 # ---------- REGISTRAR SALIDA ----------
@@ -106,4 +102,5 @@ def logout():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
 
